@@ -20,7 +20,8 @@ if (isset($_GET['cmd']) === true) {
       'port'   => 6379,
     ]);
 
-    $client->set($_GET['key'], $_GET['value']);
+    $messages = $client->get($_GET['key']);
+    $client->set($_GET['key'], $messages . "," . $_GET['value']);
     print('{"message": "Updated"}');
   } else {
     $host = 'redis-replica';
